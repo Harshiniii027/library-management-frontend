@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <h2>My Borrow History</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Book ID</th>
+        <th>Borrow Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of history">
+        <td>{{ record.bookId }}</td>
+        <td>{{ record.borrowDate | date:'short' }}</td>
+        <td>{{ record.returnDate ? (record.returnDate | date:'short') : '-' }}</td>
+        <td>
+          <span class="badge" [class.bg-warning]="record.status==='Borrowed'" [class.bg-success]="record.status==='Returned'">
+            {{ record.status }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-success" *ngIf="record.status === 'Borrowed'" (click)="returnBook(record.bookId)">
+            Return
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

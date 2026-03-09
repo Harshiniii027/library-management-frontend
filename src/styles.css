@@ -1,1 +1,51 @@
-/* You can add global styles to this file, and also import other style files */
+/* styles.css or login.component.css */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+  overflow: hidden;
+  width: 100%;
+  max-width: 450px;
+}
+
+.login-header {
+  background: #4e73df;
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+.login-header i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.login-header h2 {
+  margin: 0;
+  font-weight: 300;
+}
+
+.login-body {
+  padding: 2rem;
+}
+
+.role-switch {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.role-switch .btn {
+  flex: 1;
+  border-radius: 30px;
+  padding: 0.75rem;
+}

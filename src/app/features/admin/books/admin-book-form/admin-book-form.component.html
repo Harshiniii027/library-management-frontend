@@ -1,0 +1,23 @@
+<div class="container mt-4">
+  <h2>{{ isEdit ? 'Edit Book' : 'Add New Book' }}</h2>
+  <form (ngSubmit)="submit()" #bookForm="ngForm">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control" [(ngModel)]="model.title" name="title" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Author</label>
+      <input type="text" class="form-control" [(ngModel)]="model.author" name="author" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <input type="text" class="form-control" [(ngModel)]="model.category" name="category" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Total Copies</label>
+      <input type="number" class="form-control" [(ngModel)]="model.totalCopies" name="totalCopies" required min="1">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="bookForm.invalid">Save</button>
+    <a routerLink="/admin/books" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+</div>

@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <h2>Manage Users</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.userId }}</td>
+        <td>{{ user.fullName }}</td>
+        <td>{{ user.email }}</td>
+        <td>
+          <span class="badge" [class.bg-success]="user.isActive" [class.bg-danger]="!user.isActive">
+            {{ user.isActive ? 'Active' : 'Inactive' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm" [class.btn-warning]="user.isActive" [class.btn-success]="!user.isActive"
+            (click)="toggleStatus(user)">
+            {{ user.isActive ? 'Deactivate' : 'Activate' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

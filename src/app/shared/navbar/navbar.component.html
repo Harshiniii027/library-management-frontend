@@ -1,0 +1,69 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <i class="bi bi-book-half me-2"></i>LibraryMS
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <!-- Left side navigation links (visible only when logged in) -->
+      <ul class="navbar-nav me-auto" *ngIf="user">
+        <!-- Admin links -->
+        <ng-container *ngIf="role === 'Admin'">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive="active">
+              <i class="bi bi-speedometer2"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/books" routerLinkActive="active">
+              <i class="bi bi-book"></i> Manage Books
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">
+              <i class="bi bi-people"></i> Manage Users
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/admin/borrow-records" routerLinkActive="active">
+              <i class="bi bi-list-check"></i> Borrow Records
+            </a>
+          </li>
+        </ng-container>
+
+        <!-- User links -->
+        <ng-container *ngIf="role === 'User'">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/user/dashboard" routerLinkActive="active">
+              <i class="bi bi-house-door"></i> Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/user/books" routerLinkActive="active">
+              <i class="bi bi-book"></i> Available Books
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/user/history" routerLinkActive="active">
+              <i class="bi bi-clock-history"></i> Borrow History
+            </a>
+          </li>
+        </ng-container>
+      </ul>
+
+      <!-- Right side user info & logout -->
+      <ul class="navbar-nav ms-auto" *ngIf="user">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle"></i> {{ user.fullName }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
