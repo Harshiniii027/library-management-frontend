@@ -14,6 +14,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
+    // Immediate load from storage (in case observable hasn't emitted)
+    this.user = this.authService.getUser();
+    this.role = this.user ? this.user.role : null;
+
+    // Subscribe to future changes
     this.userSub = this.authService.user$.subscribe(user => {
       this.user = user;
       this.role = user ? user.role : null;

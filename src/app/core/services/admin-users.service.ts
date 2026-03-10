@@ -14,7 +14,19 @@ export class AdminUsersService {
     return this.http.get<User[]>(this.apiUrl);
   }
 
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/${id}`);
+  }
+
   updateUserStatus(id: number, dto: UpdateUserStatusDto): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}/status`, dto);
+  }
+
+  deleteUser(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  getUserBorrowHistory(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${id}/borrow-history`);
   }
 }

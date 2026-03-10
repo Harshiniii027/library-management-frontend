@@ -1,19 +1,10 @@
 <div class="login-container">
   <div class="login-card">
     <div class="login-header">
-      <i class="bi bi-book-half"></i>
-      <h2>Library Management</h2>
+      <i class="bi bi-journal-bookmark-fill"></i>
+      <h2>Welcome Back</h2>
     </div>
     <div class="login-body">
-      <div class="role-switch">
-        <button class="btn" [class.btn-primary]="role==='User'" [class.btn-outline-primary]="role!=='User'" (click)="role='User'">
-          <i class="bi bi-person"></i> User
-        </button>
-        <button class="btn" [class.btn-primary]="role==='Admin'" [class.btn-outline-primary]="role!=='Admin'" (click)="role='Admin'">
-          <i class="bi bi-shield-lock"></i> Admin
-        </button>
-      </div>
-
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <div class="mb-3">
           <label class="form-label">Email</label>
@@ -39,10 +30,16 @@
 
         <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
 
-        <button type="submit" class="btn btn-primary w-100 py-2" [disabled]="loginForm.invalid">
-          <i class="bi bi-box-arrow-in-right me-2"></i>Login
+        <button type="submit" class="btn btn-primary w-100 py-2" [disabled]="loginForm.invalid || isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2"></span>
+          <i class="bi bi-box-arrow-in-right me-2" *ngIf="!isLoading"></i>
+          {{ isLoading ? 'Logging in...' : 'Login' }}
         </button>
       </form>
+
+      <div class="mt-3 text-center">
+        Don't have an account? <a routerLink="/register">Sign up</a>
+      </div>
     </div>
   </div>
 </div>

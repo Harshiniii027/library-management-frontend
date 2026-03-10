@@ -1,33 +1,52 @@
 import { Component } from '@angular/core';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { LoginRequest } from 'src/app/models/dtos';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   credentials: LoginRequest = { email: '', password: '' };
-  role: 'Admin' | 'User' = 'User'; // toggle between admin/user login
   errorMessage = '';
+  isLoading = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
     this.errorMessage = '';
-    const loginCall = this.role === 'Admin'
-      ? this.authService.adminLogin(this.credentials)
-      : this.authService.userLogin(this.credentials);
+    this.isLoading = true;
 
-    loginCall.subscribe({
+    // First try admin login
+    this.authService.adminLogin(this.credentials).subscribe({
       next: () => {
-        const redirect = this.role === 'Admin' ? '/admin' : '/user';
-        this.router.navigate([redirect]);
+        this.isLoading = false;
+        this.router.navigate(['/admin']);
       },
-      error: err => {
-        this.errorMessage = err.error?.message || 'Login failed';
+      error: (adminErr) => {
+        // If admin fails, try user login
+        this.authService.userLogin(this.credentials).subscribe({
+          next: () => {
+            this.isLoading = false;
+            this.router.navigate(['/user']);
+          },
+          error: (userErr) => {
+            this.isLoading = false;
+            this.errorMessage = 'Invalid email or password';
+          }
+        });
       }
     });
+  }
+
+  fillAdminDemo() {
+    this.credentials = {
+      email: 'admin@library.com',   // change to your actual admin email
+      password: 'admin123'           // change to your actual admin password
+    };
+    // Directly call login – no need to set role
+    this.login();
   }
 }

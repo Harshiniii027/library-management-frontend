@@ -10,10 +10,10 @@ import { UserBorrowService } from 'src/app/core/services/user-borrow.service';
 })
 export class UserDashboardComponent implements OnInit {
   user = this.authService.getUser();
-  currentlyBorrowed = 0;
-  totalBorrowed = 0;
-  availableBooks = 0;
-  recentHistory: any[] = [];
+  currentlyBorrowed: number = 0;
+  totalBorrowed: number = 0;
+  availableBooks: number = 0;
+  recentActivity: any[] = [];
 
   constructor(
     private authService: AuthService,
@@ -23,25 +23,22 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.loadStats();
-    this.loadRecentHistory();
+    this.loadRecentActivity();
   }
 
   loadStats() {
     this.borrowService.getMyBorrowHistory().subscribe(history => {
-      this.totalBorrowed = history.length;
       this.currentlyBorrowed = history.filter(h => h.status === 'Borrowed').length;
+      this.totalBorrowed = history.length;
     });
-
     this.booksService.getAvailableBooks().subscribe(books => {
       this.availableBooks = books.length;
     });
   }
 
-  loadRecentHistory() {
+  loadRecentActivity() {
     this.borrowService.getMyBorrowHistory().subscribe(history => {
-      this.recentHistory = history.sort((a: any, b: any) => 
-        new Date(b.borrowDate).getTime() - new Date(a.borrowDate).getTime()
-      ).slice(0, 5);
+      this.recentActivity = history.slice(0, 5); // last 5
     });
   }
 }

@@ -7,7 +7,7 @@
         <th>Full Name</th>
         <th>Email</th>
         <th>Status</th>
-        <th>Action</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -21,9 +21,14 @@
           </span>
         </td>
         <td>
-          <button class="btn btn-sm" [class.btn-warning]="user.isActive" [class.btn-success]="!user.isActive"
-            (click)="toggleStatus(user)">
+          <button class="btn btn-sm btn-info me-2" (click)="viewUser(user.userId)">
+            <i class="bi bi-eye"></i> View
+          </button>
+          <button class="btn btn-sm" [class.btn-warning]="user.isActive" [class.btn-success]="!user.isActive" (click)="toggleStatus(user)">
             {{ user.isActive ? 'Deactivate' : 'Activate' }}
+          </button>
+          <button class="btn btn-sm btn-danger ms-2" (click)="deleteUser(user.userId)">
+            <i class="bi bi-trash"></i> Delete
           </button>
         </td>
       </tr>

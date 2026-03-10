@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './features/login/login/login.component';
+import { HomeComponent } from './features/home/home.component';
+import { RegisterComponent } from './features/register/register.component';
 import { AuthGuard } from './core/guards/auth.guard';
+
+
+import { UserDetailComponent } from './features/admin/user-detail/user-detail.component';
+import { LoginComponent } from './features/login/login/login.component';
 import { AdminDashboardComponent } from './features/admin/dashboard/admin-dashboard/admin-dashboard.component';
 import { AdminBooksListComponent } from './features/admin/books/admin-books-list/admin-books-list.component';
 import { AdminBookFormComponent } from './features/admin/books/admin-book-form/admin-book-form.component';
@@ -14,8 +19,9 @@ import { BorrowHistoryComponent } from './features/user/borrow-history/borrow-hi
 
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent },
 
   // Admin routes
   {
@@ -28,6 +34,7 @@ const routes: Routes = [
       { path: 'books/add', component: AdminBookFormComponent },
       { path: 'books/edit/:id', component: AdminBookFormComponent },
       { path: 'users', component: AdminUsersComponent },
+      { path: 'users/:id', component: UserDetailComponent },
       { path: 'borrow-records', component: AdminBorrowRecordsComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
     ]
@@ -46,7 +53,7 @@ const routes: Routes = [
     ]
   },
 
-  { path: '**', redirectTo: '/login' }
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

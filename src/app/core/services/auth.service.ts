@@ -3,12 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-// import { LoginRequest, LoginResponse } from '../models/dtos';
-import { LoginResponse, LoginRequest } from 'src/app/models/dtos';
+import { LoginRequest, LoginResponse } from 'src/app/models/dtos';
+
+export interface RegisterRequest {
+  fullName: string;
+  email: string;
+  password: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private apiUrl = 'http://localhost:5189/api/auth'; // adjust port if needed
+  private apiUrl = 'http://localhost:5189/api/auth';
   private tokenKey = 'auth_token';
   private userKey = 'user_info';
   private userSubject = new BehaviorSubject<any>(this.getUser());
@@ -26,9 +31,12 @@ export class AuthService {
       .pipe(tap(res => this.setSession(res)));
   }
 
+  register(data: RegisterRequest): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, data);
+  }
+
   private setSession(response: any) {
     const token = response.token;
-    // Normalize user object (admin returns flat, user returns nested)
     const user = response.user || {
       userId: response.userId,
       fullName: response.fullName,

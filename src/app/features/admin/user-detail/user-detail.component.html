@@ -1,0 +1,46 @@
+<div class="container mt-4" *ngIf="!loading && user">
+  <div class="d-flex justify-content-between mb-4">
+    <h2>User Details</h2>
+    <button class="btn btn-secondary" (click)="goBack()">
+      <i class="bi bi-arrow-left"></i> Back
+    </button>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">{{ user.fullName }}</h5>
+      <p class="card-text">Email: {{ user.email }}</p>
+      <p class="card-text">
+        Status:
+        <span class="badge" [class.bg-success]="user.isActive" [class.bg-danger]="!user.isActive">
+          {{ user.isActive ? 'Active' : 'Inactive' }}
+        </span>
+      </p>
+    </div>
+  </div>
+
+  <h4>Borrow History</h4>
+  <table class="table table-striped" *ngIf="borrowHistory.length > 0">
+    <thead>
+      <tr>
+        <th>Book Title</th>
+        <th>Borrow Date</th>
+        <th>Return Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of borrowHistory">
+        <td>{{ record.bookTitle }}</td>
+        <td>{{ record.borrowDate | date:'short' }}</td>
+        <td>{{ record.returnDate ? (record.returnDate | date:'short') : '-' }}</td>
+        <td>
+          <span class="badge" [class.bg-warning]="record.status==='Borrowed'" [class.bg-success]="record.status==='Returned'">
+            {{ record.status }}
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="borrowHistory.length === 0" class="text-muted">No borrow history for this user.</p>
+</div>

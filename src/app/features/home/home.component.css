@@ -1,0 +1,26 @@
+.home-full {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f3e5f5 0%, #f8bbd0 100%);
+  color: #2d3748; /* dark text for contrast */
+}
+
+h1 {
+  color: #1a202c;
+  text-shadow: 0 2px 4px rgba(255,255,255,0.5);
+}
+
+.lead {
+  color: #2d3748;
+  font-weight: 400;
+}
+
+.btn-outline-light {
+  border: 2px solid #9c27b0;
+  color: #9c27b0;
+  background: rgba(255,255,255,0.2);
+}
+.btn-outline-light:hover {
+  background: #9c27b0;
+  border-color: #9c27b0;
+  color: white;
+}

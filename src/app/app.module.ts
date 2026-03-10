@@ -16,6 +16,9 @@ import { BorrowHistoryComponent } from './features/user/borrow-history/borrow-hi
 import { FormsModule } from '@angular/forms';
 import {  HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { HomeComponent } from './features/home/home.component';
+import { RegisterComponent } from './features/register/register.component';
+import { UserDetailComponent } from './features/admin/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
     AdminBorrowRecordsComponent,
     UserDashboardComponent,
     AvailableBooksComponent,
-    BorrowHistoryComponent
+    BorrowHistoryComponent,
+    HomeComponent,
+    RegisterComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
