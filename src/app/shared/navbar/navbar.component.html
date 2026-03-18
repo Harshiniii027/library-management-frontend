@@ -1,14 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-dark navbar-theme">
   <div class="container">
     <a class="navbar-brand" routerLink="/">
-      <i class="bi bi-journal-bookmark-fill me-2"></i>LibraryMS
+      <i class="bi bi-journal-bookmark-fill me-2"></i>Library
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <!-- Public links when not logged in -->
         <ng-container *ngIf="!user">
           <li class="nav-item">
             <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
